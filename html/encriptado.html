@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<html lang="en" >
 <html>
 <head>
   <title>Encriptar/Desencriptar</title>
@@ -11,25 +10,54 @@
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#encriptar").click(function() {
+          var texto = $("#texto").val();
+          var clave = $("#clave").val();
+          $.post("../php/encriptar.php", { texto: texto,clave:clave }, function(data) {
+            $("#texto_encriptado").val(data);
+          });
+        });
+
+        $("#desencriptar").click(function() {
+          var texto_encriptado = $("#texto_encriptado").val();
+          var clave = $("#clave").val();
+          $.post("../php/desencriptar.php", { texto_encriptado: texto_encriptado,clave:clave }, function(data) {
+            $("#texto").val(data);
+          });
+        });
+      });
+    </script>
 </head>
 
 <body class="body">
+  
   <div class="user-info">
-    <p style="color: white">Nombre completo</p>
     <p style="color: white">Usuario</p>
+    <p style="color: white" onclick="window.location.href='../index.html'">Desconectarse</p>
   </div>
 <div class="login-page">
+  
   <div class="form">
+    <textarea id="clave" rows="5" cols="50"></textarea>
+    <h4>Clave</h4>
     <form>
-      <br>
-      <button type="button" onclick="window.location.href='../index.html'">ENCRIPTAR</button>
+      <button type="button" id="encriptar">ENCRIPTAR</button>
       <p class="message"></p>
     </form>
+    
+    <textarea id="texto" rows="5" cols="50"></textarea>
+    <h4>Texto Plano</h4>
     <form class="login-form">
-      <button type="button" onclick="window.location.href='../index.html'">DESENCRIPTAR</button>
+      <button type="button" id="desencriptar">DESENCRIPTAR</button>
     </form>
+    
+    <textarea id="texto_encriptado" rows="5" cols="50" readonly></textarea>
+    <h4>Texto Encriptado</h4>
   </div>
 </div>
-  <script src = "register.js"></script>
+
 </body>
 </html>
