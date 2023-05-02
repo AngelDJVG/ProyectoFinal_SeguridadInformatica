@@ -1,9 +1,9 @@
 <?php
 // Conecta a la base de datos
 $servername = "localhost";
-$username = "root";
-$password = "valenzuela10";
-$dbname = "seguridad";
+$username = "id20687038_pablonaelcano";
+$password = "1$#??3CbJUd{7F=d";
+$dbname = "id20687038_seguridad";
 
 // Crea la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -27,20 +27,24 @@ $usuario = $_POST['usuario'];
 $contrasena = $_POST['contrasena'];
 
 // Prepara la consulta preparada
-$stmt = $conn->prepare("INSERT INTO usuarios (nombre_completo, correo, usuario, contrasena) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $nombre, $email, $usuario, $contrasena);
-
-// Ejecuta la consulta preparada
-if ($stmt->execute() === TRUE) {
-    echo "Registro exitoso";
-    header("Location: ../html/index.html");
-    exit();
-} else {
-    echo "Error: " . $stmt->error;
-    header("Location:../html/index.html");
+$sql="INSERT INTO USUARIOS (nombre_completo, correo, usuario, contrasena) VALUES (?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+if (!$stmt) {
+    echo("Error al preparar la consulta SQL: " . mysqli_error($conn));
+    header("Location: ../index.html");
     exit();
 }
 
+$stmt->bind_param("ssss", $nombre, $email, $usuario, $contrasena);
+
+if (!$stmt->execute()) {
+    echo("Error al ejecutar la consulta SQL: " . mysqli_error($conn));
+    header("Location: ../index.html");
+    exit();
+}
+
+header("Location: ../index.html");
+exit();
 $stmt->close();
 $conn->close();
 ?>
