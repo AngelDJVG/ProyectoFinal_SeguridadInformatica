@@ -11,6 +11,8 @@
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="../js/sesion.js"></script>
+
     <script>
       $(document).ready(function() {
         $("#encriptar").click(function() {
@@ -35,29 +37,41 @@
 <body class="body">
   
   <div class="user-info">
-    <p style="color: white">Usuario</p>
-    <p style="color: white" onclick="window.location.href='../index.html'">Desconectarse</p>
+   <p style="color: white" id="usuario"></p>
+
+    <p class="desconectarse" style="color: white" onclick="window.location.href='../index.html'">Desconectarse</p>
   </div>
 <div class="login-page">
   
   <div class="form">
-    <textarea id="clave" rows="5" cols="50"></textarea>
-    <h4>Clave</h4>
+      <h4>Clave</h4>
+    <textarea id="clave" placeholder="Aquí debes colocar tu clave para encriptar y desencriptar texto" rows="5" cols="50"></textarea>
     <form>
+        <br>
       <button type="button" id="encriptar">ENCRIPTAR</button>
       <p class="message"></p>
     </form>
-    
-    <textarea id="texto" rows="5" cols="50"></textarea>
-    <h4>Texto Plano</h4>
+     <h4>Texto Plano</h4>
+    <textarea id="texto" placeholder="Texto a encriptar" rows="5" cols="50"></textarea>
     <form class="login-form">
+        <br>
       <button type="button" id="desencriptar">DESENCRIPTAR</button>
     </form>
-    
-    <textarea id="texto_encriptado" rows="5" cols="50" readonly></textarea>
     <h4>Texto Encriptado</h4>
+    <textarea id="texto_encriptado" placeholder="Aquí saldrá tu texto encriptado" rows="5" cols="50" readonly></textarea>
   </div>
 </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      // Obtener los parámetros de la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const usuario = urlParams.get('usuario');
 
+      // Mostrar los datos del usuario en la página
+      document.getElementById('usuario').textContent = usuario;
+      history.pushState({}, null, '/SeguridadAES/'+usuario);
+    });
+  </script>
 </body>
 </html>
+

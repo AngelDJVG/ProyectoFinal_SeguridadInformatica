@@ -130,6 +130,15 @@ body {
   -moz-osx-font-smoothing: grayscale;    
 }
 
-.fas{
+.fas {
   color: rgb(170, 170, 170);
+  transition: transform 0.2s;
+}
+
+.fas:hover {
+  cursor: pointer;
+}
+
+.fas:active {
+  transform: scale(2.2);
 }

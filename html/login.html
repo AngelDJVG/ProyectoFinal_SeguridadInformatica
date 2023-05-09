@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" >
-<html>
+<html lang="en">
 <head>
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,27 +10,37 @@
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <script src="https://hcaptcha.com/1/api.js" async defer></script>
+      <script src="../js/sesion.js"></script>
+  <script>
+    function onSubmit(token) {
+      document.getElementById("login-form").submit();
+    }
+  </script>
+  <script>history.pushState({}, null, '/SeguridadAES/Logeate');</script>
 </head>
 
 <body class="body">
-<div class="login-page">
-  <div class="form">
-    <form  method="POST" action="../php/login.php">
-      <input type="text" placeholder="&#xf007;  username" name="username"/>
-      <input type="password" id="password" placeholder="&#xf023;  password" name="password"/>
-      <i class="fas fa-eye" onclick="show()"></i> 
-      <br>
-      <br>
-      <button>LOGIN</button>
-      <p class="message"></p>
-    </form>
+  <div class="login-page">
+    <div class="form">
+      <form id="login-form" method="POST" action="../php/login.php" onsubmit="return validarFormularioLogin()">
+        <input type="text" placeholder="&#xf007;  Nombre de usuario" name="username" id="username" required />
+        <input type="password" id="password" placeholder="&#xf023;  Contraseña" name="password" required />
+        <i class="fas fa-eye"></i> 
+        <br>
+        <br>
+        <div class="h-captcha" data-sitekey="4b230c9a-3a6e-4123-b2e0-d9981b5a270f" data-callback="onSubmit" data-size="normal"></div>
+        <br>
+        <p style="color: white">Resuelve el captcha para ingresar</p>
+        <p class="message"></p>
+        <input type="hidden" id="usuario" name="usuario">
+      </form>
 
-    <form class="login-form">
-      <button type="button" onclick="window.location.href='index.html'">REGRESAR</button>
-    </form>
+      <form class="login-form">
+        <button type="button" onclick="window.location.href='../index.html'">REGRESAR</button>
+      </form>
+    </div>
   </div>
-</div>
-  <script src = "register.js"></script>
 </body>
+<script src = "../js/login.js"></script>
 </html>
-

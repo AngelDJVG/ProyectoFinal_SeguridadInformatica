@@ -133,3 +133,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }
+.desconectarse {
+  color: white;
+  cursor: pointer;
+}
